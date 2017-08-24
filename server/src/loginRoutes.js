@@ -13,7 +13,7 @@ loginRouter.post('/', (req, res) => {
 
     users.getUser(username)
         .then((user) => {
-            if (password == user.password) {
+            if (user && password == user.password) {
                 res.status(200).json({token: auth.token(user.username)});
             } else {
                 console.log('Invalid password for user: ' + username);
