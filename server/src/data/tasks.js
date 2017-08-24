@@ -1,3 +1,5 @@
+const db = require('sqlite');
+
 const mockTasks = [
     {
         id: 1,
@@ -26,25 +28,21 @@ const getTask = (id) => {
 
 module.exports = {
     getAllTasks: () => {
-        return new Promise((fulfill, reject) => {
-            fulfill(mockTasks);
-        });
+        return db.all('SELECT * from task');
     },
 
     addTask: (task) => {
         return new Promise((fulfill, reject) => {
-            const id = getNextId();
-            mockTasks.push({
-                id: id,
-                text: task.text,
-                done: false
+            db.run('INSERT INTO task (name, done) VALUES ($name, $done)', {
+                $name: task.text,
+                $done: 0
+            }).then((res) => {
+                const created_task = task;
+                task.id = res.lastId
+                fulfill(created_task);
+            }).catch(err => {
+                reject(err);
             });
-            const created = getTask(id);
-            if (created) {
-                fulfill(created);
-            } else {
-                reject({error: 'Could not create task'});
-            }
         });
     },
 

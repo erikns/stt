@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const db = require('sqlite');
 
 const tasks = require('./data/tasks');
 
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 
 app.get('/tasks', (req, res) => {
     tasks.getAllTasks().then((data) => {
+        console.log(data);
         res.status(200).json(data);
     });
 });
@@ -35,6 +37,10 @@ app.put('/tasks/:id', (req, res) => {
 // REGISTER
 // ADD EDIT DELETE TASKS
 
-app.listen(3001, () => {
-    console.log('Server side app listening on port 3001');
-})
+Promise.resolve()
+    .then(() => db.open(':memory:', {Promise}))
+    .then(() => db.migrate({force: 'last'})
+    .catch(err => console.error(err.stack))
+    .then(() => app.listen(3001, () => {
+        console.log('Server side app listening on port 3001');
+})));
