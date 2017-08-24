@@ -26,6 +26,11 @@ const getTask = (id) => {
     })
 }
 
+const bool_to_int = (bool) => {
+    if (bool) return 1;
+    else return 0;
+}
+
 module.exports = {
     getAllTasks: () => {
         return db.all('SELECT * from task');
@@ -48,14 +53,14 @@ module.exports = {
 
     updateTask: (id, task) => {
         return new Promise((fulfill, reject) => {
-            var currentTask = getTask(id);
-            if (task) {
-                currentTask.text = task.text;
-                currentTask.done = task.done;
-                fulfill(currentTask);
-            } else {
-                reject({error: 'Task not found'})
-            }
+            const done_int = bool_to_int(task.done);
+            db.run('UPDATE task SET name = $name, done = $done WHERE id = $id',
+                { $name: task.text, $done: done_int, $id: id})
+                .then((result) => {
+                    fulfill(task);
+                }).catch(err => {
+                    reject(err);
+                });
         });
     }
 };
