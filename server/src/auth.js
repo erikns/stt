@@ -19,9 +19,5 @@ module.exports = {
                 done(null, false);
             }
         });
-    },
-
-    authenticate: () => {
-        return passport.authenticate('jwt', {session: false});
     }
 };
