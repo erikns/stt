@@ -19,11 +19,7 @@ opts.secretOrKey = secret;
 module.exports = {
     configure: () => {
         return new JWTStrategy(opts, (token, done) => {
-            if (token.subject == 'goodUser') {
-                done(null, {username: 'goodUser'});
-            } else {
-                done(null, false);
-            }
+            done(null, {username: token.subject});
         });
     },
 
