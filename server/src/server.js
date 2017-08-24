@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
-passport.use(auth());
+passport.use(auth.configure());
 
 app.use('/tasks', passport.authenticate('jwt', {session: false}), tasksRouter);
 app.use('/login', loginRouter);
