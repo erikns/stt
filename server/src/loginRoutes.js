@@ -1,6 +1,7 @@
 const auth = require('./auth');
 const users = require('./data/users');
 
+const crypto = require('./crypto');
 const loginRouter = require('express').Router();
 
 function reportUnauthorized(res) {
@@ -13,7 +14,7 @@ loginRouter.post('/', (req, res) => {
 
     users.getUser(username)
         .then((user) => {
-            if (user && password == user.password) {
+            if (user && crypto.verifyPassword(password, user.password)) {
                 res.status(200).json({token: auth.token(user.username)});
             } else {
                 console.log('Invalid password for user: ' + username);
