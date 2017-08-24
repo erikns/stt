@@ -2,22 +2,32 @@ const passport = require('passport');
 const jwt = require('passport-jwt');
 const JWTStrategy = jwt.Strategy;
 const ExtractJwt = jwt.ExtractJwt;
+const webtoken = require('jsonwebtoken');
+
+const secret = 'secret';
+
+function extractToken(req) {
+    var token = req.headers.authorization;
+    console.log('Provided token: ' + token);
+    return token;
+}
 
 const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret';
-opts.issuer = 'waworks-stt';
-opts.audience = 'waworks-stt';
+opts.jwtFromRequest = extractToken;
+opts.secretOrKey = secret;
 
 module.exports = {
     configure: () => {
         return new JWTStrategy(opts, (token, done) => {
-            console.log('Token: ' + token.sub);
-            if (token.sub == 'goodUser') {
+            if (token.subject == 'goodUser') {
                 done(null, {username: 'goodUser'});
             } else {
                 done(null, false);
             }
         });
+    },
+
+    token: (username) => {
+        return webtoken.sign({subject: username, test: true}, secret);
     }
 };

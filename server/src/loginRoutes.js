@@ -1,7 +1,17 @@
+const auth = require('./auth');
+
 const loginRouter = require('express').Router();
 
 loginRouter.post('/', (req, res) => {
-    res.status(401).send({error: 'Unauthorized'});
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // TODO: use database eventually!
+    if (username == 'goodUser') {
+        res.status(200).json({token: auth.token(username)});
+    } else {
+        res.status(401).send({error: 'Invalid username or password'});
+    }
 });
 
 module.exports = loginRouter;
