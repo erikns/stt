@@ -19,9 +19,7 @@ passport.use(auth.configure());
 app.use('/tasks', passport.authenticate('jwt', {session: false}), tasksRouter);
 app.use('/login', loginRouter);
 
-// LOGIN
-// LOGOUT
-// REGISTER
+// TODO: LOGOUT, REGISTER
 
 Promise.resolve()
     .then(() => db.open(':memory:', {Promise}))
