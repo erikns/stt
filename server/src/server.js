@@ -16,7 +16,9 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 passport.use(auth.configure());
 
-app.use('/tasks', passport.authenticate('jwt', {session: false}), tasksRouter);
+const authenticator = passport.authenticate('jwt', {session: false});
+
+app.use('/tasks', authenticator, tasksRouter);
 app.use('/login', loginRouter);
 
 // TODO: LOGOUT, REGISTER
