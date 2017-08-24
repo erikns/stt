@@ -6,11 +6,16 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
 import tasksApp from './reducers';
 
 let store = createStore(tasksApp, applyMiddleware(thunk));
-console.log(store);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+, document.getElementById('root'));
 registerServiceWorker();
