@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 passport.use(auth());
 
-app.use('/tasks', tasksRouter);
+app.use('/tasks', passport.authenticate('jwt', {session: false}), tasksRouter);
 app.use('/login', loginRouter);
 
 // LOGIN
