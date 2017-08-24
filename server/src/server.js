@@ -1,10 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const tasks = require('./data/tasks');
 
 const app = express();
 app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 app.get('/tasks', (req, res) => {
     tasks.getAllTasks().then((data) => {
@@ -12,10 +14,18 @@ app.get('/tasks', (req, res) => {
     });
 });
 
+app.post('/tasks', (req, res) => {
+    tasks.addTask(req.body).then((result) => {
+        res.status(201).json(result);
+    }).catch((err) => {
+        res.status(400).json(err);
+    });
+});
+
 // LOGIN
 // LOGOUT
 // REGISTER
-// ADD EDIT DELETE LIST TASKS
+// ADD EDIT DELETE TASKS
 
 app.listen(3001, () => {
     console.log('Server side app listening on port 3001');

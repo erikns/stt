@@ -11,10 +11,40 @@ const mockTasks = [
     }
 ]
 
+var mockNextId = 1;
+const getNextId = () => {
+    const next = mockNextId;
+    mockNextId = mockNextId + 1;
+    return next;
+}
+
+const getTask = (id) => {
+    return mockTasks.find((task) => {
+        return task.id === id;
+    })
+}
+
 module.exports = {
     getAllTasks: () => {
         return new Promise((fulfill, reject) => {
             fulfill(mockTasks);
+        });
+    },
+
+    addTask: (task) => {
+        return new Promise((fulfill, reject) => {
+            const id = getNextId();
+            mockTasks.push({
+                id: id,
+                text: task.text,
+                done: false
+            });
+            const created = getTask(id);
+            if (created) {
+                fulfill(created);
+            } else {
+                reject({error: 'Could not create task'});
+            }
         });
     }
 };
