@@ -46,5 +46,18 @@ module.exports = {
                 reject({error: 'Could not create task'});
             }
         });
+    },
+
+    updateTask: (id, task) => {
+        return new Promise((fulfill, reject) => {
+            var currentTask = getTask(id);
+            if (task) {
+                currentTask.text = task.text;
+                currentTask.done = task.done;
+                fulfill(currentTask);
+            } else {
+                reject({error: 'Task not found'})
+            }
+        });
     }
 };

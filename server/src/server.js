@@ -22,6 +22,15 @@ app.post('/tasks', (req, res) => {
     });
 });
 
+app.put('/tasks/:id', (req, res) => {
+    console.log(req.params);
+    tasks.updateTask(Number(req.params.id), req.body).then((result) => {
+        res.status(200).json(result);
+    }).catch((err) => {
+        res.status(404).json({error: 'Task does not exist'});
+    });
+});
+
 // LOGIN
 // LOGOUT
 // REGISTER
