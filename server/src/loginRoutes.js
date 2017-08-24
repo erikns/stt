@@ -36,6 +36,6 @@ loginRouter.get('/refresh', (req, res) => {
     } else {
         reportUnauthorized(res);
     }
-})
+});
 
 module.exports = loginRouter;
