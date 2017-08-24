@@ -28,4 +28,14 @@ loginRouter.post('/', (req, res) => {
         });
 });
 
+loginRouter.get('/refresh', (req, res) => {
+    const token = req.headers.authorization;
+    if (token && auth.verify(token)) {
+        const decodedToken = auth.decodeToken(token);
+        res.status(200).json({token: auth.token(decodedToken.subject)});
+    } else {
+        reportUnauthorized(res);
+    }
+})
+
 module.exports = loginRouter;

@@ -25,5 +25,13 @@ module.exports = {
 
     token: (username) => {
         return webtoken.sign({subject: username, test: true}, secret);
+    },
+
+    verify: (token) => {
+        return webtoken.verify(token, secret);
+    },
+
+    decodeToken: (token) => {
+        return webtoken.decode(token, {complete: true}).payload;
     }
 };
