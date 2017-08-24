@@ -1,31 +1,5 @@
 const db = require('sqlite');
 
-const mockTasks = [
-    {
-        id: 1,
-        text: 'Test task 1',
-        done: false
-    },
-    {
-        id: 2,
-        text: 'Test task 2',
-        done: false
-    }
-]
-
-var mockNextId = 1;
-const getNextId = () => {
-    const next = mockNextId;
-    mockNextId = mockNextId + 1;
-    return next;
-}
-
-const getTask = (id) => {
-    return mockTasks.find((task) => {
-        return task.id === id;
-    })
-}
-
 const bool_to_int = (bool) => {
     if (bool) return 1;
     else return 0;
