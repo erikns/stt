@@ -2,14 +2,22 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const db = require('sqlite');
+const passport = require('passport');
 
 const tasksRouter = require('./taskRoutes');
+const loginRouter = require('./loginRoutes');
+
+const auth = require('./auth');
 
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
+passport.use(auth());
+
 app.use('/tasks', tasksRouter);
+app.use('/login', loginRouter);
 
 // LOGIN
 // LOGOUT
