@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { loadPersistedLogin } from './actions';
+
 import Home from './components/HomePage';
 import Login from './components/LoginPage';
 import Header from './components/Header';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+      this.props.onLoad();
+  }
+
   render() {
       const renderApp = () => {
           if (this.props.session.loggedIn === true) {
@@ -38,4 +44,12 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+    return {
+        onLoad: () => {
+            dispatch(loadPersistedLogin());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

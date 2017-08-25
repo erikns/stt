@@ -31,7 +31,12 @@ export default (state = initialState, action) => {
             return state;
 
         case actionTypes.LOGIN_SUCCESS:
-            return state;
+            return Object.assign({}, state, {
+                session: {
+                    loggedIn: true,
+                    token: action.payload
+                }
+            });
 
         case actionTypes.LOGIN_FAILED:
             return state;

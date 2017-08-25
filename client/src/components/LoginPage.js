@@ -21,7 +21,7 @@ const LoginPage = (props) => {
         <p>Please log in to use the service</p>
         <button onClick={e => {
             e.preventDefault();
-            props.onLoginClick('test', 'test')
+            props.onLoginClick('user1@localhost', 'password1')
         }}>
             TEST
         </button>
