@@ -2,7 +2,7 @@ import React from 'react';
 
 const TaskList = (props) => {
     const taskItems = props.tasks.map((task) => {
-        return <li>{task.name}</li>
+        return <li key={task.id}>{task.name}</li>
     });
     return (
         <div>
