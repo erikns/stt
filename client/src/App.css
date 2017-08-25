@@ -18,6 +18,36 @@
   font-size: large;
 }
 
+input {
+    padding: .25em;
+    margin: .5em;
+    display: block;
+    width: 200px;
+}
+
+input[type=text] {
+    font-size: 16px;
+}
+
+input[type=password] {
+    font-size: 16px;
+}
+
+input[type=button] {
+    font-size: 16px;
+    margin: .5em;
+    padding: .5em;
+    text-decoration: none;
+    border: none;
+    background-color: #61DAFB;
+    color: white;
+}
+
+form.login {
+    font-size: large;
+    display: inline-block;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
