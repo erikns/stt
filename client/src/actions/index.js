@@ -1,3 +1,5 @@
+import actionTypes from '../actionTypes';
+
 const mockTodos = [
     {
         id: 1,
@@ -9,10 +11,10 @@ const mockTodos = [
 export const getAllTasks = () => {
     return (dispatch) => {
         dispatch({
-            type: 'GET_ALL_TASKS_START'
+            type: actionTypes.GET_ALL_TASKS_START
         });
         dispatch({
-            type: 'GET_ALL_TASKS_SUCCESS',
+            type: actionTypes.GET_ALL_TASKS_SUCCESS,
             payload: mockTodos
         });
     };

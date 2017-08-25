@@ -1,3 +1,4 @@
+import actionTypes from '../actionTypes';
 
 const initialState = {
     tasks: []
@@ -9,7 +10,7 @@ export default (state = initialState, action) => {
     console.log('action');
     console.log(action.payload);
     switch (action.type) {
-        case 'GET_ALL_TASKS_SUCCESS':
+        case actionTypes.GET_ALL_TASKS_SUCCESS:
             return Object.assign({}, state, {
                 tasks: action.payload
             });
