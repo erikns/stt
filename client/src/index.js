@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import tasksApp from './reducers';
-import { getAllTasks, loadPersistedToken } from './actions';
+import { loadPersistedToken } from './actions';
 
 let store = createStore(tasksApp, applyMiddleware(thunk));
 

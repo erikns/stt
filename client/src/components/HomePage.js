@@ -6,7 +6,6 @@ import TaskList from './TaskList';
 const Home = (props) => {
     const tasks = props.tasks;
     const tasksFailure = props.tasksFailure;
-    const history = props.history;
 
     const mainContent = () => {
         if (tasksFailure === true) {

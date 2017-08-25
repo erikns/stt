@@ -31,6 +31,10 @@ class LoginPage extends Component {
         this.setState({password: event.target.value});
     }
 
+    handleLoginClick(event) {
+        this.props.onLoginClick(this.state.username, this.state.password);
+    }
+
     render() {
         return (
             <div className="App-intro">
@@ -42,7 +46,7 @@ class LoginPage extends Component {
                         onChange={this.onPasswordChange} />
                     <input type="button" value="Log in" onClick={e => {
                         e.preventDefault();
-                        this.props.onLoginClick()
+                        this.handleLoginClick();
                     }}/>
                 </form>
             </div>
