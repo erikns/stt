@@ -6,6 +6,20 @@ import TaskList from './TaskList';
 
 const Home = (props) => {
     const tasks = props.tasks;
+    const tasksFailure = props.tasksFailure;
+
+    const mainContent = () => {
+        if (tasksFailure === true) {
+            return (
+                <p>An error occurred!</p>
+            );
+        } else {
+            return (
+                <TaskList tasks={tasks}/>
+            );
+        }
+    }
+
     return (
         <div>
             <div className="App-header">
@@ -13,7 +27,7 @@ const Home = (props) => {
               <h2>Welcome to TaskManager</h2>
             </div>
             <div className="App-intro">
-                <TaskList tasks={tasks}/>
+                {mainContent()}
             </div>
         </div>
     );
@@ -22,7 +36,8 @@ const Home = (props) => {
 function mapStateToProps(state) {
     console.log(state);
     return {
-        tasks: state.tasks
+        tasks: state.tasks,
+        tasksFailure: state.tasksFailure
     };
 }
 

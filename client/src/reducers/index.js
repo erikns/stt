@@ -1,7 +1,8 @@
 import actionTypes from '../actionTypes';
 
 const initialState = {
-    tasks: []
+    tasks: [],
+    tasksFailure: false
 }
 
 export default (state = initialState, action) => {
@@ -14,6 +15,13 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 tasks: action.payload
             });
+
+        case actionTypes.GET_ALL_TASKS_FAILED:
+            return Object.assign({}, state, {
+                tasks: [],
+                tasksFailure: true
+            });
+
         default: return state;
     }
 };

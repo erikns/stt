@@ -4,14 +4,6 @@ import actionTypes from '../actionTypes';
 
 const api = restful('http://localhost:3001', fetchBackend(fetch));
 
-const mockTodos = [
-    {
-        id: 1,
-        name: 'Test task',
-        done: false
-    }
-];
-
 export const getAllTasks = () => {
     return (dispatch) => {
         dispatch({
@@ -22,12 +14,16 @@ export const getAllTasks = () => {
             console.log(response);
         }).catch(error => {
             console.log(error);
+            dispatch({
+                type: actionTypes.GET_ALL_TASKS_FAILED
+            })
         });
         console.log(tasksCollection);
 
+        /*
         dispatch({
             type: actionTypes.GET_ALL_TASKS_SUCCESS,
             payload: mockTodos
-        });
+        });*/
     };
 }
