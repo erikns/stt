@@ -6,6 +6,7 @@ const passport = require('passport');
 
 const tasksRouter = require('./taskRoutes');
 const loginRouter = require('./loginRoutes');
+const registerRouter = require('./registerRoutes');
 
 const auth = require('./auth');
 
@@ -20,6 +21,7 @@ const authenticator = passport.authenticate('jwt', {session: false});
 
 app.use('/tasks', authenticator, tasksRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 // TODO: LOGOUT, REGISTER
 
