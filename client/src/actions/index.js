@@ -27,3 +27,29 @@ export const getAllTasks = () => {
         });*/
     };
 }
+
+export const performLogin = (username, password) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionTypes.LOGIN_START
+        });
+
+        const loginEndpoint = api.all('login');
+        loginEndpoint.post({username: username, password: password})
+            .then(response => {
+                const tokenEntity = response.body();
+                dispatch({
+                    type: actionTypes.LOGIN_SUCCESS,
+                    payload: tokenEntity.token
+                })
+            })
+            .catch(err => {
+                console.log('Login error');
+                console.log(err);
+                dispatch({
+                    type: actionTypes.LOGIN_FAILED,
+                    payload: {}
+                })
+            })
+    };
+}

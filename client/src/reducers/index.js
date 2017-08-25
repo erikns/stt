@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
     console.log('State:');
     console.log(state);
     console.log('action');
+    console.log(action.type);
     console.log(action.payload);
     switch (action.type) {
         case actionTypes.GET_ALL_TASKS_SUCCESS:
@@ -25,6 +26,15 @@ export default (state = initialState, action) => {
                 tasks: [],
                 tasksFailure: true
             });
+
+        case actionTypes.LOGIN_START:
+            return state;
+
+        case actionTypes.LOGIN_SUCCESS:
+            return state;
+
+        case actionTypes.LOGIN_FAILED:
+            return state;
 
         default: return state;
     }
