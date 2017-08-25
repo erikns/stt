@@ -29,12 +29,16 @@ module.exports = {
         return new Promise((fulfill, reject) => {
             const done_int = bool_to_int(task.done);
             db.run('UPDATE task SET name = $name, done = $done WHERE id = $id',
-                { $name: task.text, $done: done_int, $id: id})
+                { $name: task.name, $done: done_int, $id: id})
                 .then((result) => {
                     fulfill(task);
                 }).catch(err => {
                     reject(err);
                 });
         });
+    },
+
+    getTask: (id) => {
+        return db.get('SELECT * FROM task WHERE id = $id', {$id: id});
     }
 };
