@@ -4,6 +4,15 @@ import actionTypes from '../actionTypes';
 
 const api = restful('http://localhost:3001', fetchBackend(fetch));
 
+api.addRequestInterceptor(config => {
+    const { headers } = config;
+    const token = sessionStorage.getItem('tasksAppToken');
+    if (token) {
+        headers.Authorization = sessionStorage.getItem('tasksAppToken');
+    }
+    return { headers };
+})
+
 export const getAllTasks = () => {
     return (dispatch) => {
         dispatch({
