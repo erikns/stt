@@ -12,7 +12,6 @@ import tasksApp from './reducers';
 import { getAllTasks } from './actions';
 
 let store = createStore(tasksApp, applyMiddleware(thunk));
-store.dispatch(getAllTasks());
 
 ReactDOM.render(
     <Provider store={store}>
