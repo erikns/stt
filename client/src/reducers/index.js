@@ -31,6 +31,7 @@ export default (state = initialState, action) => {
             return state;
 
         case actionTypes.LOGIN_SUCCESS:
+            sessionStorage.setItem('tasksAppToken', action.payload);
             return Object.assign({}, state, {
                 session: {
                     loggedIn: true,

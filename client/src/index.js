@@ -9,9 +9,14 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import tasksApp from './reducers';
-import { getAllTasks } from './actions';
+import { getAllTasks, loadPersistedToken } from './actions';
 
 let store = createStore(tasksApp, applyMiddleware(thunk));
+
+const persistedToken = sessionStorage.getItem('tasksAppToken');
+if (persistedToken) {
+    store.dispatch(loadPersistedToken());
+}
 
 ReactDOM.render(
     <Provider store={store}>

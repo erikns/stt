@@ -37,7 +37,9 @@ export const performLogin = (username, password) => {
         const loginEndpoint = api.all('login');
         loginEndpoint.post({username: username, password: password})
             .then(response => {
-                const tokenEntity = response.body();
+                const tokenEntity = response.body(false);
+                console.log(response);
+                console.log(tokenEntity);
                 dispatch({
                     type: actionTypes.LOGIN_SUCCESS,
                     payload: tokenEntity.token
@@ -52,4 +54,10 @@ export const performLogin = (username, password) => {
                 })
             })
     };
+}
+
+export const loadPersistedToken = (token) => {
+    return (dispatch) => {
+        dispatch({type: actionTypes.LOGIN_SUCCESS, payload: token});
+    }
 }
