@@ -13,9 +13,13 @@ const Home = (props) => {
             return (
                 <p>An error occurred!</p>
             );
-        } else {
+        } else if (tasks.length > 0) {
             return (
                 <TaskList tasks={tasks}/>
+            );
+        } else {
+            return (
+                <p>There are no tasks to display!</p>    
             );
         }
     }
