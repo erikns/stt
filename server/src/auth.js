@@ -4,7 +4,7 @@ const JWTStrategy = jwt.Strategy;
 const ExtractJwt = jwt.ExtractJwt;
 const webtoken = require('jsonwebtoken');
 
-const secret = 'secret';
+const secret = 'secret'; // TODO: make configurable
 
 function extractToken(req) {
     var token = req.headers.authorization;
@@ -28,9 +28,11 @@ module.exports = {
     },
 
     token: (username, extras) => {
-        var opts = {subject: username, test: true, refresh: false};
+        var opts = {subject: username, test: true, refresh: false,
+            expiresIn: 3600}; // TODO: make expiration time configurable?
         if (extras && extras.refresh) {
             opts.refresh = true;
+            opts.expiresIn = 36000; // TODO: make refresh expiration time configurable?
         }
         return webtoken.sign(opts, secret);
     },
