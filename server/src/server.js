@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const db = require('sqlite');
 const passport = require('passport');
+const cors = require('cors');
 
 const tasksRouter = require('./taskRoutes');
 const loginRouter = require('./loginRoutes');
@@ -13,6 +14,7 @@ const auth = require('./auth');
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(cors()); // TODO: configure origin!
 
 app.use(passport.initialize());
 passport.use(auth.configure());
