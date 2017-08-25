@@ -23,7 +23,7 @@ const LoginPage = (props) => {
             e.preventDefault();
             props.onLoginClick('user1@localhost', 'password1')
         }}>
-            TEST
+            Login
         </button>
         </div>
     );
