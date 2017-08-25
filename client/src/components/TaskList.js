@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class TaskList extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Tasks</h1>
-            </div>
-        );
-    }
-}
+const TaskList = (props) => {
+    const taskItems = props.tasks.map((task) => {
+        return <li>{task.name}</li>
+    });
+    return (
+        <div>
+            <h1>Tasks</h1>
+            <ul>
+                {taskItems}
+            </ul>
+        </div>
+    );
+};
+
+export default TaskList;
