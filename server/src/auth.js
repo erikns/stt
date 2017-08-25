@@ -19,12 +19,20 @@ opts.secretOrKey = secret;
 module.exports = {
     configure: () => {
         return new JWTStrategy(opts, (token, done) => {
-            done(null, {username: token.subject});
+            if (token.refresh === false) {
+                done(null, {username: token.subject});
+            } else {
+                done(null, false); // do not accept refresh tokens for normal auth
+            }
         });
     },
 
-    token: (username) => {
-        return webtoken.sign({subject: username, test: true}, secret);
+    token: (username, extras) => {
+        var opts = {subject: username, test: true, refresh: false};
+        if (extras && extras.refresh) {
+            opts.refresh = true;
+        }
+        return webtoken.sign(opts, secret);
     },
 
     verify: (token) => {

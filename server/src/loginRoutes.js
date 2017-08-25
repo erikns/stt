@@ -15,7 +15,8 @@ loginRouter.post('/', (req, res) => {
     users.getUser(username)
         .then((user) => {
             if (user && crypto.verifyPassword(password, user.password)) {
-                res.status(200).json({token: auth.token(user.username)});
+                res.status(200).json({token: auth.token(user.username),
+                    refresh: auth.token(user.username, {refresh: true})});
             } else {
                 console.log('Invalid password for user: ' + username);
                 reportUnauthorized(res);
@@ -32,7 +33,11 @@ loginRouter.get('/refresh', (req, res) => {
     const token = req.headers.authorization;
     if (token && auth.verify(token)) {
         const decodedToken = auth.decodeToken(token);
-        res.status(200).json({token: auth.token(decodedToken.subject)});
+        if (decodedToken.refresh === true) {
+            res.status(200).json({token: auth.token(decodedToken.subject)});
+        } else {
+            reportUnauthorized(res);
+        }
     } else {
         reportUnauthorized(res);
     }
