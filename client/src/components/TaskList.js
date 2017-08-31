@@ -3,10 +3,14 @@ import Icon from 'react-fa';
 
 const TaskItem = ({done, id, name, markTaskDone}) => {
     const nonSelectableStyle = {
-      "-webkit-user-select": "none"
+       "-webkit-user-select": "none",
+       "-moz-user-select": "-moz-none",
+       "-khtml-user-select": "none"
     };
     const selectableStyle = {
-        "-webkit-user-select": "auto"
+        "-webkit-user-select": "auto",
+        "-moz-user-select": "-moz-auto",
+        "-khtml-user-select": "auto"
     };
     const style = {
         cursor: 'pointer'
