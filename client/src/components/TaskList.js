@@ -3,8 +3,10 @@ import Icon from 'react-fa';
 
 const TaskToolbar = ({id, done, onToggle}) => {
     return (
-        <div style={{cursor: 'pointer'}} className="right toolbar">
-            <a onClick={() => onToggle(id, !done)}><Icon name='check' /></a>
+        <div className="right toolbar">
+            <a style={{cursor: 'pointer'}} onClick={() => onToggle(id, !done)}>
+                <Icon name='check' />
+            </a>
         </div>
     );
 };
