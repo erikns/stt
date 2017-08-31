@@ -24,7 +24,7 @@ const TaskItem = ({done, id, name, markTaskDone}) => {
             <div className="right toolbar">
                 <Icon style={style} name={iconName} onClick={() => markTaskDone(id, !done)} />
                 &nbsp;&nbsp;
-                |
+                <span style={{color: "#ccc"}}>|</span>
                 &nbsp;&nbsp;
                 <Icon style={style} name="trash" />
             </div>
