@@ -1,20 +1,36 @@
 import React from 'react';
 
-const TaskList = (props) => {
+const TaskItem = (props) => {
     const doneButton = (done) => {
         if (done) {
-            return <div className="right">mark undone</div>;
+            return (
+                <div className="right">
+                    mark undone
+                </div>
+            );
         } else {
-            return <div className="right">mark done</div>;
+            return (
+                <div className="right">
+                    mark done
+                </div>
+            );
         }
     };
 
+    if (props.done === 0) {
+        return (
+            <li key={props.id}>{props.name}{doneButton(props.done)}</li>
+        );
+    } else {
+        return (
+            <li key={props.id} className="done">{props.name}{doneButton(props.done)}</li>
+        );
+    }
+};
+
+const TaskList = (props) => {
     const taskItems = props.tasks.map((task) => {
-        if (task.done === 0) {
-            return <li key={task.id}>{task.name}{doneButton(false)}</li>
-        } else {
-            return <li key={task.id} className="done">{task.name}{doneButton(true)}</li>
-        }
+        return <TaskItem id={task.id} name={task.name} done={task.done} />
     });
 
     return (
