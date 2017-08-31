@@ -28,7 +28,7 @@ export const getAllTasks = () => {
             dispatch({
                 type: actionTypes.GET_ALL_TASKS_SUCCESS,
                 payload: tasksCollection
-            })
+            });
         }).catch(error => {
             console.log(error);
             dispatch({
@@ -68,7 +68,7 @@ export const performLogin = (username, password) => {
                 dispatch({
                     type: actionTypes.LOGIN_FAILED,
                     payload: err
-                })
+                });
             })
     };
 }
