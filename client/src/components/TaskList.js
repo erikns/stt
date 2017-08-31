@@ -15,6 +15,7 @@ const TaskItem = ({done, id, name, markTaskDone}) => {
     const style = {
         cursor: 'pointer'
     };
+    const deleteStyle = Object.assign({}, style, {color: 'red'});
     const iconName = done ? 'times' : 'check';
     return (
         <li className={done ? "done" : ""} style={nonSelectableStyle}>
@@ -26,7 +27,7 @@ const TaskItem = ({done, id, name, markTaskDone}) => {
                 &nbsp;&nbsp;
                 <span style={{color: "#ccc"}}>|</span>
                 &nbsp;&nbsp;
-                <Icon style={style} name="trash" />
+                <Icon style={deleteStyle} name="trash" />
             </div>
         </li>
     );
