@@ -1,31 +1,23 @@
 import React from 'react';
+import Icon from 'react-fa';
+
+const TaskToolbar = ({id, done, onToggle}) => {
+    return (
+        <div style={{cursor: 'pointer'}} className="right toolbar">
+            <a onClick={() => onToggle(id, !done)}><Icon name='check' /></a>
+        </div>
+    );
+};
 
 const TaskItem = (props) => {
-    const doneButton = (done) => {
-        if (done) {
-            return (
-                <div className="right">
-                    <button onClick={() => props.markTaskDone(props.id, false)}>mark undone</button>
-                </div>
-            );
-        } else {
-            return (
-                <div className="right">
-                    <button onClick={() => props.markTaskDone(props.id, true)}>mark done</button>
-                </div>
-            );
-        }
-    };
-
-    if (!props.done) {
-        return (
-            <li>{props.name}{doneButton(props.done)}</li>
-        );
-    } else {
-        return (
-            <li className="done">{props.name}{doneButton(props.done)}</li>
-        );
-    }
+    return (
+        <li className={props.done ? "done" : ""}>
+            {props.name}
+            <TaskToolbar id={props.id} done={props.done}
+                onToggle={(id, done) => props.markTaskDone(id, done)}
+            />
+        </li>
+    );
 };
 
 const TaskList = (props) => {
