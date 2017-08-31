@@ -3,6 +3,7 @@ import actionTypes from '../actionTypes';
 const initialState = {
     tasks: [],
     tasksFailure: false,
+    hideCompleted: false,
     session: {
         loggedIn: false,
         token: null,
@@ -57,6 +58,11 @@ export default (state = initialState, action) => {
             console.log('Task idx: ' + idx);
             return Object.assign({}, state, {
                 tasks: updateObjectInArray(state.tasks, {index: idx, item: action.payload})
+            });
+
+        case actionTypes.TOGGLE_HIDE_COMPLETED_TASKS:
+            return Object.assign({}, state, {
+                hideCompleted: !state.hideCompleted
             });
 
         default: return state;

@@ -35,15 +35,22 @@ const TaskItem = ({done, id, name, markTaskDone}) => {
 
 const TaskList = (props) => {
     const taskItems = props.tasks.map((task) => {
-        return (
-            <TaskItem key={task.id} id={task.id} name={task.name} done={task.done}
-                markTaskDone={props.markTaskDone} />
-        );
+        if (props.hideCompleted && task.done) {
+            return (<div key={task.id} style={{display: 'none'}}/>);
+        } else {
+            return (
+                <TaskItem key={task.id} id={task.id} name={task.name} done={task.done}
+                    markTaskDone={props.markTaskDone} />
+            );
+        }
     });
 
     return (
         <div>
             <h1><Icon name="tasks" /> Tasks</h1>
+            <div>
+                <button onClick={() => props.toggleHideCompletedTasks()}>Hide completed tasks</button>
+            </div>
             <ul className="tasks">
                 {taskItems}
             </ul>

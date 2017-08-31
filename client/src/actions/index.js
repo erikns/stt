@@ -95,6 +95,13 @@ export const performLogin = (username, password) => {
     };
 }
 
+export const toggleHideCompletedTasks = () => {
+    return (dispatch) => {
+        console.log('Toggle hide completed action');
+        dispatch({type: actionTypes.TOGGLE_HIDE_COMPLETED_TASKS});
+    }
+}
+
 export const loadPersistedToken = (token) => {
     return (dispatch) => {
         dispatch({type: actionTypes.LOGIN_SUCCESS, payload: token});
