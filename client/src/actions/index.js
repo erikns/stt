@@ -7,6 +7,7 @@ const api = restful('http://localhost:3001', fetchBackend(fetch));
 api.addRequestInterceptor(config => {
     const { headers } = config;
     const token = sessionStorage.getItem('tasksAppToken');
+    console.log('API CALL with token: ' + token);
     if (token) {
         headers.Authorization = sessionStorage.getItem('tasksAppToken');
     }
@@ -19,15 +20,22 @@ export const getAllTasks = () => {
             type: actionTypes.GET_ALL_TASKS_START
         });
 
-        const tasksCollection = api.all('tasks').getAll().then(response => {
-            console.log(response);
+        api.all('tasks').getAll().then(response => {
+            console.log('TASKS OK');
+            const tasksCollection = response.body(false);
+            console.log(tasksCollection);
+
+            dispatch({
+                type: actionTypes.GET_ALL_TASKS_SUCCESS,
+                payload: tasksCollection
+            })
         }).catch(error => {
             console.log(error);
             dispatch({
-                type: actionTypes.GET_ALL_TASKS_FAILED
+                type: actionTypes.GET_ALL_TASKS_FAILED,
+                payload: error
             })
         });
-        console.log(tasksCollection);
 
         /*
         dispatch({

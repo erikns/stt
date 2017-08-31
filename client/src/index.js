@@ -15,7 +15,7 @@ let store = createStore(tasksApp, applyMiddleware(thunk));
 
 const persistedToken = sessionStorage.getItem('tasksAppToken');
 if (persistedToken) {
-    store.dispatch(loadPersistedToken());
+    store.dispatch(loadPersistedToken(persistedToken));
 }
 
 ReactDOM.render(

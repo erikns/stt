@@ -1,34 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TaskList from './TaskList';
 
-const Home = (props) => {
-    const tasks = props.tasks;
-    const tasksFailure = props.tasksFailure;
+import { getAllTasks } from '../actions';
+function mapDispatchToProps(dispatch) {
+    return {
+        loadTasks: () => dispatch(getAllTasks())
+    }
+}
 
-    const mainContent = () => {
-        if (tasksFailure === true) {
-            return (
-                <p>An error occurred!</p>
-            );
-        } else if (tasks.length > 0) {
-            return (
-                <TaskList tasks={tasks}/>
-            );
-        } else {
-            return (
-                <p>There are no tasks to display!</p>
-            );
-        }
+class Home extends Component {
+    componentWillMount() {
+        console.log('Will mount home page');
+        this.props.loadTasks();
     }
 
-    return (
-        <div className="App-intro">
-            {mainContent()}
-        </div>
-    );
-};
+    render() {
+        const tasks = this.props.tasks;
+        const tasksFailure = this.props.tasksFailure;
+
+        const mainContent = () => {
+            if (tasksFailure === true) {
+                return (
+                    <p>An error occurred!</p>
+                );
+            } else if (tasks.length > 0) {
+                return (
+                    <TaskList tasks={tasks}/>
+                );
+            } else {
+                return (
+                    <p>There are no tasks to display!</p>
+                );
+            }
+        }
+
+        return (
+            <div className="App-intro">
+                {mainContent()}
+            </div>
+        );
+    }
+}
 
 function mapStateToProps(state) {
     console.log(state);
@@ -38,4 +52,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
