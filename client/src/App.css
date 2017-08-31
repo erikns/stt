@@ -52,6 +52,27 @@ p.error {
     color: red;
 }
 
+ul.tasks {
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    width: 50%;
+}
+
+ul.tasks li {
+    display: block;
+    padding: 1em;
+    margin: 0.5em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #bbb;
+    text-align: left;
+}
+
+ul.tasks li.done {
+    border-color: #5b5;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
