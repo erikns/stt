@@ -26,10 +26,18 @@ router.put('/:id', (req, res) => {
 
 router.patch('/:id', (req, res) => {
     const updated_task = req.body;
+    console.log(updated_task);
     tasks.getTask(Number(req.params.id)).then((task) => {
         console.log(task);
         if (updated_task.name) { task.name = updated_task.name };
-        if (updated_task.done) { task.done = updated_task.done };
+        if (updated_task.done === true) {
+            task.done = true;
+        } else if (updated_task.done === false) {
+            task.done = false;
+        } else {
+            res.status(400).json({error: 'Invalid done state'});
+            return;
+        }
         console.log('Updated task');
         console.log(task);
         tasks.updateTask(Number(req.params.id), task).then((result) => {
