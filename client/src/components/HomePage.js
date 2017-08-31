@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import TaskList from './TaskList';
 
-import { getAllTasks } from '../actions';
+import { getAllTasks, markTaskDone } from '../actions';
 function mapDispatchToProps(dispatch) {
     return {
-        loadTasks: () => dispatch(getAllTasks())
+        loadTasks: () => dispatch(getAllTasks()),
+        markTaskDone: (id, done) => dispatch(markTaskDone(id, done))
     }
 }
 
@@ -27,7 +28,7 @@ class Home extends Component {
                 );
             } else if (tasks.length > 0) {
                 return (
-                    <TaskList tasks={tasks}/>
+                    <TaskList tasks={tasks} markTaskDone={this.props.markTaskDone}/>
                 );
             } else {
                 return (

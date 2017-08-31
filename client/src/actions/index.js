@@ -14,6 +14,12 @@ api.addRequestInterceptor(config => {
     return { headers };
 })
 
+export const markTaskDone = (id, done) => {
+    return (dispatch) => {
+        console.log('Marked done ' + id + ' ' + done)
+    };
+}
+
 export const getAllTasks = () => {
     return (dispatch) => {
         dispatch({
