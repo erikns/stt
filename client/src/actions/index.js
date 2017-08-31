@@ -17,6 +17,23 @@ api.addRequestInterceptor(config => {
 export const markTaskDone = (id, done) => {
     return (dispatch) => {
         console.log('Marked done ' + id + ' ' + done)
+        dispatch({
+            type: actionTypes.MARK_TASK_DONE_START
+        });
+
+        const done_int = done === true ? 1 : 0;
+        api.one('tasks', id).patch({done: done_int}).then(response => {
+            const updatedTask = response.body(false);
+            dispatch({
+                type: actionTypes.MARK_TASK_DONE_SUCCESS,
+                payload: updatedTask
+            });
+        }).catch(error => {
+            dispatch({
+                type: actionTypes.MARK_TASK_DONE_FAILED,
+                payload: error
+            });
+        });
     };
 }
 

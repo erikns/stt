@@ -2,10 +2,10 @@ import React from 'react';
 
 const TaskItem = (props) => {
     const doneButton = (done) => {
-        if (done) {
+        if (done === 1) {
             return (
                 <div className="right">
-                    <button>mark undone</button>
+                    <button onClick={() => props.markTaskDone(props.id, false)}>mark undone</button>
                 </div>
             );
         } else {
@@ -30,8 +30,10 @@ const TaskItem = (props) => {
 
 const TaskList = (props) => {
     const taskItems = props.tasks.map((task) => {
-        return (<TaskItem key={task.id} id={task.id} name={task.name} done={task.done}
-            markTaskDone={props.markTaskDone} />);
+        return (
+            <TaskItem key={task.id} id={task.id} name={task.name} done={task.done}
+                markTaskDone={props.markTaskDone} />
+        );
     });
 
     return (
