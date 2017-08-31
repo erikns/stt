@@ -12,7 +12,11 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    console.log('Mapping state in login page');
+    console.log(state);
+    return {
+        loginFailure: state.session.loginFailure
+    };
 }
 
 class LoginPage extends Component {
@@ -36,9 +40,20 @@ class LoginPage extends Component {
     }
 
     render() {
+        const msg = () => {
+            if (this.props.loginFailure) {
+                return (
+                    <p className="error">Login failed</p>
+                );
+            } else {
+                return (
+                    <p>Please log in to use the service</p>
+                )
+            }
+        }
         return (
             <div className="App-intro">
-                <p>Please log in to use the service</p>
+                {msg()}
                 <form className="login">
                     <input type="text" name="username" placeholder="Username"
                         onChange={this.onUsernameChange} />

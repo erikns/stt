@@ -5,7 +5,8 @@ const initialState = {
     tasksFailure: false,
     session: {
         loggedIn: false,
-        token: null
+        token: null,
+        loginFailure: false
     }
 }
 
@@ -40,7 +41,13 @@ export default (state = initialState, action) => {
             });
 
         case actionTypes.LOGIN_FAILED:
-            return state;
+            console.log('Login failed!!!');
+            return Object.assign({}, state, {
+                session: {
+                    loggedIn: false,
+                    loginFailure: true
+                }
+            })
 
         default: return state;
     }

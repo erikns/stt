@@ -59,7 +59,7 @@ export const performLogin = (username, password) => {
                 console.log(err);
                 dispatch({
                     type: actionTypes.LOGIN_FAILED,
-                    payload: {}
+                    payload: err
                 })
             })
     };
