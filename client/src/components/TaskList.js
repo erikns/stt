@@ -2,7 +2,7 @@ import React from 'react';
 
 const TaskItem = (props) => {
     const doneButton = (done) => {
-        if (done === 1) {
+        if (done) {
             return (
                 <div className="right">
                     <button onClick={() => props.markTaskDone(props.id, false)}>mark undone</button>
@@ -17,7 +17,7 @@ const TaskItem = (props) => {
         }
     };
 
-    if (props.done === 0) {
+    if (!props.done) {
         return (
             <li>{props.name}{doneButton(props.done)}</li>
         );

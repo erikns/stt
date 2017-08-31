@@ -3,6 +3,14 @@ const router = require('express').Router();
 
 router.get('/', (req, res) => {
     tasks.getAllTasks().then((data) => {
+        data = data.map((elem) => {
+            if (elem.done === 1) {
+                elem.done = true;
+            } else {
+                elem.done = false;
+            }
+            return elem;
+        });
         res.status(200).json(data);
     });
 });
