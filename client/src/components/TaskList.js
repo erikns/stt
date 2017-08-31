@@ -2,15 +2,21 @@ import React from 'react';
 import Icon from 'react-fa';
 
 const TaskItem = ({done, id, name, markTaskDone}) => {
+    const nonSelectableStyle = {
+      "-webkit-user-select": "none"
+    };
+    const selectableStyle = {
+        "-webkit-user-select": "auto"
+    };
     const style = {
         cursor: 'pointer'
-    }
+    };
     const iconName = done ? 'times' : 'check';
     return (
-        <li className={done ? "done" : ""}>
+        <li className={done ? "done" : ""} style={nonSelectableStyle}>
             <Icon style={style} name="pencil" />
             &nbsp;&nbsp;
-            {name}
+            <span style={selectableStyle}>{name}</span>
             <div className="right toolbar">
                 <Icon style={style} name={iconName} onClick={() => markTaskDone(id, !done)} />
                 &nbsp;&nbsp;
