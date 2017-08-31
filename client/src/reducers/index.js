@@ -49,6 +49,31 @@ export default (state = initialState, action) => {
                 }
             })
 
+        case actionTypes.MARK_TASK_DONE_START:
+            return state;
+
+        case actionTypes.MARK_TASK_DONE_SUCCESS:
+            const idx = state.tasks.findIndex(e => e.id === action.payload.id);
+            console.log('Task idx: ' + idx);
+            return Object.assign({}, state, {
+                tasks: updateObjectInArray(state.tasks, {index: idx, item: action.payload})
+            });
+
         default: return state;
     }
 };
+
+function updateObjectInArray(array, action) {
+    return array.map( (item, index) => {
+        if(index !== action.index) {
+            // This isn't the item we care about - keep it as-is
+            return item;
+        }
+
+        // Otherwise, this is the one we want - return an updated value
+        return {
+            ...item,
+            ...action.item
+        };
+    });
+}
