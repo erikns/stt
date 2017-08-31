@@ -8,9 +8,15 @@ const TaskItem = ({done, id, name, markTaskDone}) => {
     const iconName = done ? 'times' : 'check';
     return (
         <li className={done ? "done" : ""}>
+            <Icon style={style} name="pencil" />
+            &nbsp;&nbsp;
             {name}
             <div className="right toolbar">
                 <Icon style={style} name={iconName} onClick={() => markTaskDone(id, !done)} />
+                &nbsp;&nbsp;
+                |
+                &nbsp;&nbsp;
+                <Icon style={style} name="trash" />
             </div>
         </li>
     );
@@ -26,7 +32,7 @@ const TaskList = (props) => {
 
     return (
         <div>
-            <h1>Tasks</h1>
+            <h1><Icon name="tasks" /> Tasks</h1>
             <ul className="tasks">
                 {taskItems}
             </ul>
