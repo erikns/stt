@@ -65,6 +65,7 @@ class NewTaskLine extends Component {
     handleSave() {
         console.log('task text: ' + this.state.taskInput);
         this.props.addTask(this.state.taskInput);
+        this.setState({ taskInput: '', editMode: false });
     }
 
     render() {
@@ -123,7 +124,7 @@ const TaskList = (props) => {
             return (
                 <ul className="tasks">
                     <li className="dim">There are no tasks to display!</li>
-                    <NewTaskLine />
+                    <NewTaskLine addTask={props.addTask} />
                 </ul>
             );
         } else {
