@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 import TaskList from './TaskList';
 
-import { getAllTasks, markTaskDone, toggleHideCompletedTasks } from '../actions';
+import tasks from '../actions';
 function mapDispatchToProps(dispatch) {
     return {
-        loadTasks: () => dispatch(getAllTasks()),
-        markTaskDone: (id, done) => dispatch(markTaskDone(id, done)),
-        toggleHideCompletedTasks: () => dispatch(toggleHideCompletedTasks())
+        loadTasks: () => dispatch(tasks.getAllTasks()),
+        deleteTask: (id) => dispatch(tasks.deleteTask(id)),
+        markTaskDone: (id, done) => dispatch(tasks.markTaskDone(id, done)),
+        toggleHideCompletedTasks: () => dispatch(tasks.toggleHideCompletedTasks())
     }
 }
 
@@ -33,6 +34,7 @@ class Home extends Component {
                         markTaskDone={this.props.markTaskDone}
                         toggleHideCompletedTasks={this.props.toggleHideCompletedTasks}
                         hideCompleted={this.props.hideCompleted}
+                        deleteTask={this.props.deleteTask}
                     />
                 );
             } else {

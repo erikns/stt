@@ -95,6 +95,12 @@ export const performLogin = (username, password) => {
     };
 }
 
+export const deleteTask = (id) => {
+    return (dispatch) => {
+        console.log('deleteTask action id: ' + id);
+    }
+}
+
 export const toggleHideCompletedTasks = () => {
     return (dispatch) => {
         console.log('Toggle hide completed action');
@@ -107,3 +113,12 @@ export const loadPersistedToken = (token) => {
         dispatch({type: actionTypes.LOGIN_SUCCESS, payload: token});
     }
 }
+
+export default {
+    markTaskDone: markTaskDone,
+    getAllTasks: getAllTasks,
+    performLogin: performLogin,
+    deleteTask: deleteTask,
+    toggleHideCompletedTasks: toggleHideCompletedTasks,
+    loadPersistedToken: loadPersistedToken
+};

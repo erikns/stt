@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from 'react-fa';
 
-const TaskItem = ({done, id, name, markTaskDone}) => {
+const TaskItem = ({done, id, name, markTaskDone, deleteTask}) => {
     const nonSelectableStyle = {
        "-webkit-user-select": "none",
        "-moz-user-select": "-moz-none",
@@ -27,7 +27,7 @@ const TaskItem = ({done, id, name, markTaskDone}) => {
                 &nbsp;&nbsp;
                 <span style={{color: "#ccc"}}>|</span>
                 &nbsp;&nbsp;
-                <Icon style={deleteStyle} name="trash" />
+                <Icon style={deleteStyle} name="trash" onClick={() => deleteTask(id)} />
             </div>
         </li>
     );
@@ -40,7 +40,7 @@ const TaskList = (props) => {
         } else {
             return (
                 <TaskItem key={task.id} id={task.id} name={task.name} done={task.done}
-                    markTaskDone={props.markTaskDone} />
+                    markTaskDone={props.markTaskDone} deleteTask={props.deleteTask} />
             );
         }
     });
