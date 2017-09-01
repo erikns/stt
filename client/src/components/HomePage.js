@@ -28,7 +28,7 @@ class Home extends Component {
                 return (
                     <p>An error occurred!</p>
                 );
-            } else if (tasks.length > 0) {
+            } else {
                 return (
                     <TaskList tasks={tasks}
                         markTaskDone={this.props.markTaskDone}
@@ -36,10 +36,6 @@ class Home extends Component {
                         hideCompleted={this.props.hideCompleted}
                         deleteTask={this.props.deleteTask}
                     />
-                );
-            } else {
-                return (
-                    <p>There are no tasks to display!</p>
                 );
             }
         }

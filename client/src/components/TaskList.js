@@ -55,6 +55,24 @@ const TaskList = (props) => {
         }
     });
 
+    const outer = () => {
+        if (props.tasks.length < 1) {
+            return (
+                <ul className="tasks">
+                    <li className="dim">There are no tasks to display!</li>
+                    <NewTaskLine />
+                </ul>
+            );
+        } else {
+            return (
+                <ul className="tasks">
+                    {taskItems}
+                    <NewTaskLine />
+                </ul>
+            );
+        }
+    };
+
     const toggleButtonText = props.hideCompleted ? "Show completed" : "Hide completed";
 
     return (
@@ -65,10 +83,7 @@ const TaskList = (props) => {
                     <Icon name="eye-slash"></Icon> {toggleButtonText}
                 </button>
             </div>
-            <ul className="tasks">
-                {taskItems}
-                <NewTaskLine />
-            </ul>
+            {outer()}
         </div>
     );
 };
