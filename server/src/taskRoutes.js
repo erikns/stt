@@ -45,8 +45,7 @@ router.patch('/:id', (req, res) => {
         } else if (updated_task.done === false) {
             task.done = false;
         } else {
-            res.status(400).json({error: 'Invalid done state'});
-            return;
+            task.done = false; // default to false
         }
         console.log('Updated task');
         console.log(task);

@@ -79,7 +79,7 @@ class TaskItem extends Component {
                         &nbsp;&nbsp;
                         <span style={{color: "#ccc"}}>|</span>
                         &nbsp;&nbsp;
-                        <Icon style={deleteStyle} name="trash" onClick={() => this.props.deleteTask(this.id)} />
+                        <Icon style={deleteStyle} name="trash" onClick={() => this.props.deleteTask(this.props.id)} />
                     </div>
                 </li>
             );

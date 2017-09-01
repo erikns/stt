@@ -127,6 +127,7 @@ export const updateTask = (id, txt) => {
                 type: actionTypes.UPDATE_TASK_SUCCESS,
                 payload: response.body()
             });
+            dispatch(getAllTasks());
         }).catch(error => {
             dispatch({
                 type: actionTypes.UPDATE_TASK_FAILED,
