@@ -38,26 +38,50 @@ class NewTaskLine extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: false
+            editMode: false,
+            taskInput: ''
         };
         this.toggleEditing = this.toggleEditing.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidUpdate() {
+        if (this.state.editMode) {
+            this.taskInput.focus();
+        }
     }
 
     toggleEditing() {
         this.setState((prevState) => {
             return { editMode: !prevState.editMode };
         });
-        console.log('component state: ' + this.state);
+    }
+
+    handleChange(event) {
+        this.setState({ taskInput: event.target.value });
     }
 
     render() {
+        const inputStyle = {
+            display: 'inline',
+            margin: 0,
+            width: '50%'
+        }
+
         const content = () => {
             if (this.state.editMode) {
                 return (
-                    <li className="dim" style={nonSelectableStyle}>
+                    <li style={nonSelectableStyle}>
                         <Icon style={{cursor: 'pointer'}} name="plus"
                             onClick={() => this.toggleEditing()} />
-                        &nbsp;&nbsp;Adding new task...
+                        &nbsp;&nbsp;
+                        <input type="text" style={inputStyle}
+                            ref={(input) => this.taskInput = input}
+                            onChange={this.handleChange}
+                            value={this.state.taskInput} />
+                        <div className="right toolbar">
+                            <Icon style={{cursor: 'pointer'}} name="save" />
+                        </div>
                     </li>
                 );
             } else {
