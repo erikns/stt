@@ -57,4 +57,13 @@ router.patch('/:id', (req, res) => {
     });
 })
 
+router.delete('/:id', (req, res) => {
+    tasks.deleteTask(Number(req.params.id)).then(() => {
+        res.status(204).send();
+    }).catch(err => {
+        console.log(err);
+        res.status(404).json({error: 'Task does not exist'});
+    });
+});
+
 module.exports = router;

@@ -40,5 +40,16 @@ module.exports = {
 
     getTask: (id) => {
         return db.get('SELECT * FROM task WHERE id = $id', {$id: id});
+    },
+
+    deleteTask: (id) => {
+        return new Promise((fulfill, reject) => {
+            db.run('DELETE FROM task WHERE id = $id', {$id: id}).then(result => {
+                console.log('Changed rows:' + result.changes);
+                fulfill();
+            }).catch(err => {
+                reject(err);
+            });
+        });
     }
 };
