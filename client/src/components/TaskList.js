@@ -45,11 +45,13 @@ const TaskList = (props) => {
         }
     });
 
+    const toggleButtonText = props.hideCompleted ? "Show completed" : "Hide completed";
+
     return (
         <div>
             <h1><Icon name="tasks" /> Tasks</h1>
             <div>
-                <button onClick={() => props.toggleHideCompletedTasks()}>Hide completed tasks</button>
+                <button onClick={() => props.toggleHideCompletedTasks()}>{toggleButtonText}</button>
             </div>
             <ul className="tasks">
                 {taskItems}
