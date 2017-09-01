@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Icon from 'react-fa';
 
 const nonSelectableStyle = {
@@ -34,13 +34,45 @@ const TaskItem = ({done, id, name, markTaskDone, deleteTask}) => {
     );
 };
 
-const NewTaskLine = (props) => {
-    return (
-        <li className="dim" style={nonSelectableStyle}>
-            <Icon style={{cursor: 'pointer'}} name="plus" />
-            &nbsp;&nbsp;Add a new task
-        </li>
-    );
+class NewTaskLine extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editMode: false
+        };
+        this.toggleEditing = this.toggleEditing.bind(this);
+    }
+
+    toggleEditing() {
+        this.setState((prevState) => {
+            return { editMode: !prevState.editMode };
+        });
+        console.log('component state: ' + this.state);
+    }
+
+    render() {
+        const content = () => {
+            if (this.state.editMode) {
+                return (
+                    <li className="dim" style={nonSelectableStyle}>
+                        <Icon style={{cursor: 'pointer'}} name="plus"
+                            onClick={() => this.toggleEditing()} />
+                        &nbsp;&nbsp;Adding new task...
+                    </li>
+                );
+            } else {
+                return (
+                    <li className="dim" style={nonSelectableStyle}>
+                        <Icon style={{cursor: 'pointer'}} name="plus"
+                            onClick={() => this.toggleEditing()} />
+                        &nbsp;&nbsp;Add a new task
+                    </li>
+                );
+            }
+        };
+
+        return content();
+    }
 }
 
 const TaskList = (props) => {
