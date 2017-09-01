@@ -64,8 +64,10 @@ class NewTaskLine extends Component {
 
     handleSave() {
         console.log('task text: ' + this.state.taskInput);
-        this.props.addTask(this.state.taskInput);
-        this.setState({ taskInput: '', editMode: false });
+        if (this.state.taskInput && this.state.taskInput.length > 0) {
+            this.props.addTask(this.state.taskInput);
+            this.setState({ taskInput: '', editMode: false });
+        }
     }
 
     render() {
