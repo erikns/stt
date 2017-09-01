@@ -115,6 +115,12 @@ export const deleteTask = (id) => {
     }
 }
 
+export const addTask = (txt) => {
+    return (dispatch) => {
+        console.log('Adding task: ' + txt);
+    }
+}
+
 export const toggleHideCompletedTasks = () => {
     return (dispatch) => {
         console.log('Toggle hide completed action');
@@ -133,6 +139,7 @@ export default {
     getAllTasks: getAllTasks,
     performLogin: performLogin,
     deleteTask: deleteTask,
+    addTask: addTask,
     toggleHideCompletedTasks: toggleHideCompletedTasks,
     loadPersistedToken: loadPersistedToken
 };

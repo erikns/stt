@@ -43,6 +43,7 @@ class NewTaskLine extends Component {
         };
         this.toggleEditing = this.toggleEditing.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     componentDidUpdate() {
@@ -59,6 +60,10 @@ class NewTaskLine extends Component {
 
     handleChange(event) {
         this.setState({ taskInput: event.target.value });
+    }
+
+    handleSave() {
+        this.props.addTask(this.state.taskInput);
     }
 
     render() {
@@ -80,7 +85,8 @@ class NewTaskLine extends Component {
                             onChange={this.handleChange}
                             value={this.state.taskInput} />
                         <div className="right toolbar">
-                            <Icon style={{cursor: 'pointer'}} name="save" />
+                            <Icon style={{cursor: 'pointer'}} name="save"
+                                onClick={() => this.handleSave()} />
                         </div>
                     </li>
                 );
@@ -123,7 +129,7 @@ const TaskList = (props) => {
             return (
                 <ul className="tasks">
                     {taskItems}
-                    <NewTaskLine />
+                    <NewTaskLine addTask={props.addTask} />
                 </ul>
             );
         }
