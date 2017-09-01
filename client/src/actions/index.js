@@ -118,6 +118,25 @@ export const deleteTask = (id) => {
 export const addTask = (txt) => {
     return (dispatch) => {
         console.log('Adding task: ' + txt);
+        dispatch({
+            type: actionTypes.ADD_TASK_START
+        })
+
+        api.all('tasks').post({
+            done: false,
+            name: txt
+        }).then(response => {
+            dispatch({
+                type: actionTypes.ADD_TASK_SUCCESS,
+                payload: response.body(false)
+            });
+            dispatch(getAllTasks());
+        }).catch(error => {
+            dispatch({
+                type: actionTypes.ADD_TASK_FAILED,
+                payload: error
+            });
+        });
     }
 }
 

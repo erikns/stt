@@ -16,9 +16,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    console.log(req.body);
     tasks.addTask(req.body).then((result) => {
         res.status(201).json(result);
     }).catch((err) => {
+        console.log(err);
         res.status(400).json(err);
     });
 });

@@ -16,7 +16,6 @@ function mapDispatchToProps(dispatch) {
 
 class Home extends Component {
     componentWillMount() {
-        console.log('Will mount home page');
         this.props.loadTasks();
     }
 

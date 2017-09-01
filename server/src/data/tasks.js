@@ -13,7 +13,7 @@ module.exports = {
     addTask: (task) => {
         return new Promise((fulfill, reject) => {
             db.run('INSERT INTO task (name, done) VALUES ($name, $done)', {
-                $name: task.text,
+                $name: task.name,
                 $done: 0
             }).then((res) => {
                 const created_task = task;
