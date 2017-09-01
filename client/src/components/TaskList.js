@@ -11,27 +11,80 @@ const selectableStyle = {
     "-moz-user-select": "-moz-auto",
     "-khtml-user-select": "auto"
 };
+const inputStyle = {
+    display: 'inline',
+    margin: 0,
+    width: '50%'
+}
 
-const TaskItem = ({done, id, name, markTaskDone, deleteTask}) => {
-    const style = {
-        cursor: 'pointer'
-    };
-    const deleteStyle = Object.assign({}, style, {color: 'red'});
-    const iconName = done ? 'times' : 'check';
-    return (
-        <li className={done ? "done" : ""} style={nonSelectableStyle}>
-            <Icon style={style} name="pencil" />
-            &nbsp;&nbsp;
-            <span style={selectableStyle}>{name}</span>
-            <div className="right toolbar">
-                <Icon style={style} name={iconName} onClick={() => markTaskDone(id, !done)} />
-                &nbsp;&nbsp;
-                <span style={{color: "#ccc"}}>|</span>
-                &nbsp;&nbsp;
-                <Icon style={deleteStyle} name="trash" onClick={() => deleteTask(id)} />
-            </div>
-        </li>
-    );
+class TaskItem extends Component {
+    constructor(props) {
+        super(props)
+
+        this.toggleEditing = this.toggleEditing.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+
+        this.state = {
+            taskName: this.props.name,
+            editing: false
+        };
+    }
+
+    toggleEditing() {
+        if (!this.done) {
+            this.setState((oldState) => {
+                return {
+                    editing: !oldState.editing
+                }
+            });
+        }
+    }
+
+    handleChange(e) {
+        this.setState({taskName: e.target.value});
+    }
+
+    handleSave() {
+        this.toggleEditing();
+        this.props.updateTask(this.props.id, this.state.taskName);
+    }
+
+    render () {
+        if (this.state.editing) {
+            return (
+                <li style={nonSelectableStyle}>
+                    <Icon style={{cursor: 'pointer'}} name='save' onClick={() => this.handleSave()} />
+                    &nbsp;&nbsp;
+                    <input type="text" style={inputStyle} onChange={this.handleChange}
+                        ref={(input) => this.taskInput = input}
+                        value={this.state.taskName} />
+                </li>
+            );
+        } else {
+            const style = {
+                cursor: 'pointer'
+            };
+            const deleteStyle = Object.assign({}, style, {color: 'red'});
+            const iconName = this.done ? 'times' : 'check';
+            return (
+                <li className={this.props.done ? "done" : ""} style={nonSelectableStyle}>
+                    <Icon style={style} name="pencil" onClick={() => this.toggleEditing()} />
+                    &nbsp;&nbsp;
+                    <span style={selectableStyle}>{this.props.name}</span>
+                    <div className="right toolbar">
+                        <Icon style={style}
+                            name={iconName}
+                            onClick={() => this.props.markTaskDone(this.props.id, !this.props.done)} />
+                        &nbsp;&nbsp;
+                        <span style={{color: "#ccc"}}>|</span>
+                        &nbsp;&nbsp;
+                        <Icon style={deleteStyle} name="trash" onClick={() => this.props.deleteTask(this.id)} />
+                    </div>
+                </li>
+            );
+        }
+    }
 };
 
 class NewTaskLine extends Component {
@@ -71,11 +124,6 @@ class NewTaskLine extends Component {
     }
 
     render() {
-        const inputStyle = {
-            display: 'inline',
-            margin: 0,
-            width: '50%'
-        }
 
         const content = () => {
             if (this.state.editMode) {
@@ -116,7 +164,8 @@ const TaskList = (props) => {
         } else {
             return (
                 <TaskItem key={task.id} id={task.id} name={task.name} done={task.done}
-                    markTaskDone={props.markTaskDone} deleteTask={props.deleteTask} />
+                    markTaskDone={props.markTaskDone} deleteTask={props.deleteTask}
+                    updateTask={props.updateTask} />
             );
         }
     });

@@ -60,6 +60,12 @@ export default (state = initialState, action) => {
                 tasks: updateObjectInArray(state.tasks, {index: idx, item: action.payload})
             });
 
+        case actionTypes.UPDATE_TASK_SUCCESS:
+            const idx2 = state.tasks.findIndex(e => e.id === action.payload.id);
+            return Object.assign({}, state, {
+                tasks: updateObjectInArray(state.tasks, {index: idx2, item: action.payload})
+            });
+
         case actionTypes.TOGGLE_HIDE_COMPLETED_TASKS:
             return Object.assign({}, state, {
                 hideCompleted: !state.hideCompleted

@@ -10,6 +10,7 @@ function mapDispatchToProps(dispatch) {
         deleteTask: (id) => dispatch(tasks.deleteTask(id)),
         markTaskDone: (id, done) => dispatch(tasks.markTaskDone(id, done)),
         addTask: (txt) => dispatch(tasks.addTask(txt)),
+        updateTask: (id, txt) => dispatch(tasks.updateTask(id, txt)),
         toggleHideCompletedTasks: () => dispatch(tasks.toggleHideCompletedTasks())
     }
 }
@@ -36,6 +37,7 @@ class Home extends Component {
                         hideCompleted={this.props.hideCompleted}
                         deleteTask={this.props.deleteTask}
                         addTask={this.props.addTask}
+                        updateTask={this.props.updateTask}
                     />
                 );
             }

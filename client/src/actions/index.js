@@ -115,6 +115,27 @@ export const deleteTask = (id) => {
     }
 }
 
+export const updateTask = (id, txt) => {
+    return (dispatch) => {
+        console.log('update task ' + id + ' to ' + txt);
+        dispatch({
+            type: actionTypes.UPDATE_TASK_START
+        });
+
+        api.one('tasks', id).patch({name: txt}).then(response => {
+            dispatch({
+                type: actionTypes.UPDATE_TASK_SUCCESS,
+                payload: response.body()
+            });
+        }).catch(error => {
+            dispatch({
+                type: actionTypes.UPDATE_TASK_FAILED,
+                payload: error
+            });
+        })
+    };
+}
+
 export const addTask = (txt) => {
     return (dispatch) => {
         console.log('Adding task: ' + txt);
@@ -160,5 +181,6 @@ export default {
     deleteTask: deleteTask,
     addTask: addTask,
     toggleHideCompletedTasks: toggleHideCompletedTasks,
-    loadPersistedToken: loadPersistedToken
+    loadPersistedToken: loadPersistedToken,
+    updateTask: updateTask
 };
