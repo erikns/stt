@@ -98,6 +98,20 @@ export const performLogin = (username, password) => {
 export const deleteTask = (id) => {
     return (dispatch) => {
         console.log('deleteTask action id: ' + id);
+        dispatch({
+            type: actionTypes.DELETE_TASK_START
+        });
+
+        api.one('tasks', id).delete().then(response => {
+            dispatch({
+                type: actionTypes.DELETE_TASK_SUCCESS
+            });
+            dispatch(getAllTasks()); // get all tasks fresh when deleting
+        }).catch(err => {
+            dispatch({
+                type: actionTypes.DELETE_TASK_FAILED
+            });
+        });
     }
 }
 
