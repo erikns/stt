@@ -123,7 +123,7 @@ const TaskList = (props) => {
         if (props.tasks.length < 1) {
             return (
                 <ul className="tasks">
-                    <li className="dim">There are no tasks to display!</li>
+                    <li className="dim">Please create some tasks</li>
                     <NewTaskLine addTask={props.addTask} />
                 </ul>
             );
