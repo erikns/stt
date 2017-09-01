@@ -71,6 +71,12 @@ ul.tasks li.done {
     background-color: #ded;
 }
 
+ul.tasks li.dim {
+    background-color: #fcfcfc;
+    color: #aaa;
+    font-style: italic;
+}
+
 div.right {
     float: right;
 }

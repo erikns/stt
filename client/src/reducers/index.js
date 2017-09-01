@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
                     loggedIn: false,
                     loginFailure: true
                 }
-            })
+            });
 
         case actionTypes.MARK_TASK_DONE_START:
             return state;

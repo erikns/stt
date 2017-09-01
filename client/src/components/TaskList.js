@@ -1,17 +1,18 @@
 import React from 'react';
 import Icon from 'react-fa';
 
+const nonSelectableStyle = {
+   "-webkit-user-select": "none",
+   "-moz-user-select": "-moz-none",
+   "-khtml-user-select": "none"
+};
+const selectableStyle = {
+    "-webkit-user-select": "auto",
+    "-moz-user-select": "-moz-auto",
+    "-khtml-user-select": "auto"
+};
+
 const TaskItem = ({done, id, name, markTaskDone, deleteTask}) => {
-    const nonSelectableStyle = {
-       "-webkit-user-select": "none",
-       "-moz-user-select": "-moz-none",
-       "-khtml-user-select": "none"
-    };
-    const selectableStyle = {
-        "-webkit-user-select": "auto",
-        "-moz-user-select": "-moz-auto",
-        "-khtml-user-select": "auto"
-    };
     const style = {
         cursor: 'pointer'
     };
@@ -32,6 +33,15 @@ const TaskItem = ({done, id, name, markTaskDone, deleteTask}) => {
         </li>
     );
 };
+
+const NewTaskLine = (props) => {
+    return (
+        <li className="dim" style={nonSelectableStyle}>
+            <Icon style={{cursor: 'pointer'}} name="plus" />
+            &nbsp;&nbsp;Add a new task
+        </li>
+    );
+}
 
 const TaskList = (props) => {
     const taskItems = props.tasks.map((task) => {
@@ -57,6 +67,7 @@ const TaskList = (props) => {
             </div>
             <ul className="tasks">
                 {taskItems}
+                <NewTaskLine />
             </ul>
         </div>
     );
