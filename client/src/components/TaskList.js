@@ -51,7 +51,9 @@ const TaskList = (props) => {
         <div>
             <h1><Icon name="tasks" /> Tasks</h1>
             <div>
-                <button onClick={() => props.toggleHideCompletedTasks()}>{toggleButtonText}</button>
+                <button onClick={() => props.toggleHideCompletedTasks()}>
+                    <Icon name="eye-slash"></Icon> {toggleButtonText}
+                </button>
             </div>
             <ul className="tasks">
                 {taskItems}
