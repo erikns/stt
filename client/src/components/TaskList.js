@@ -97,6 +97,7 @@ class NewTaskLine extends Component {
         this.toggleEditing = this.toggleEditing.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     componentDidUpdate() {
@@ -116,10 +117,15 @@ class NewTaskLine extends Component {
     }
 
     handleSave() {
-        console.log('task text: ' + this.state.taskInput);
         if (this.state.taskInput && this.state.taskInput.length > 0) {
             this.props.addTask(this.state.taskInput);
             this.setState({ taskInput: '', editMode: false });
+        }
+    }
+
+    handleKeyPress(event) {
+        if (event.charCode === 13) { // enter key pressed
+            this.handleSave();
         }
     }
 
@@ -135,6 +141,7 @@ class NewTaskLine extends Component {
                         <input type="text" style={inputStyle}
                             ref={(input) => this.taskInput = input}
                             onChange={this.handleChange}
+                            onKeyPress={this.handleKeyPress}
                             value={this.state.taskInput} />
                         <div className="right toolbar">
                             <Icon style={{cursor: 'pointer'}} name="save"
