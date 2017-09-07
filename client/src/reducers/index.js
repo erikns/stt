@@ -9,7 +9,8 @@ const initialState = {
         loggedIn: false,
         token: null,
         loginFailure: false
-    }
+    },
+    registering: ''
 }
 
 export default (state = initialState, action) => {
@@ -31,7 +32,11 @@ export default (state = initialState, action) => {
             });
 
         case actionTypes.LOGIN_START:
-            return state;
+            return Object.assign({}, state, {
+                session: {
+                    loginFailure: false
+                }
+            });
 
         case actionTypes.LOGIN_SUCCESS:
             sessionStorage.setItem('tasksAppToken', action.payload);
@@ -80,6 +85,16 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 hideCompleted: !state.hideCompleted,
                 hiddenTasks: findTasksToHide(state.tasks, {unhide: state.hideCompleted})
+            });
+
+        case actionTypes.REGISTER_SUCCESS:
+            return Object.assign({}, state, {
+                registering: 'done'
+            });
+
+        case actionTypes.REGISTERING_CLEAR:
+            return Object.assign({}, state, {
+                registering: ''
             });
 
         default: return state;

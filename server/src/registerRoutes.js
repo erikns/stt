@@ -1,4 +1,5 @@
 const users = require('./data/users');
+const crypto = require('./crypto');
 
 const registerRouter = require('express').Router();
 
@@ -28,8 +29,12 @@ function validateInput(user) {
 
 registerRouter.post('/', (req, res) => {
     const candidate_user = req.body;
+    console.log(candidate_user);
     const validation = validateInput(candidate_user);
+    console.log(validation);
     if (validation.valid === true) {
+        console.log('valid user');
+        candidate_user.password = crypto.hashPassword(candidate_user.password);
         users.addUser(candidate_user)
             .then((created_user) => {
                 res.status(201).json(created_user);

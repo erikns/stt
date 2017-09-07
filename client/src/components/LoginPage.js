@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { performLogin } from '../actions';
@@ -16,7 +16,8 @@ const mapStateToProps = (state) => {
     console.log('Mapping state in login page');
     console.log(state);
     return {
-        loginFailure: state.session.loginFailure
+        loginFailure: state.session.loginFailure,
+        loggedIn: state.session.loggedIn
     };
 }
 
@@ -42,6 +43,10 @@ class LoginPage extends Component {
     }
 
     render() {
+        if (this.props.loggedIn === true) {
+            return <Redirect to="/" />;
+        }
+
         const msg = () => {
             if (this.props.loginFailure) {
                 return (
@@ -66,7 +71,7 @@ class LoginPage extends Component {
                         this.handleLoginClick();
                     }}/>
                 </form>
-                <p>If you do not have an account, you can <Link 
+                <p>If you do not have an account, you can <Link
                     to="/register">register</Link></p>
             </div>
         );

@@ -181,6 +181,25 @@ export const performLogout = () => {
     }
 };
 
+export const performRegister = (username, password) => {
+    return (dispatch) => {
+        dispatch({type: actionTypes.REGISTER_START});
+        api.all('register').post({
+            username: username,
+            password: password
+        }).then(response => {
+            dispatch({type: actionTypes.REGISTER_SUCCESS, payload: response.body(false)});
+        }).catch(err => {
+            console.log(err);
+            dispatch({type: actionTypes.REGISTER_FAILED, payload: err});
+        });
+    }
+}
+
+export const clearRegistering = () => {
+    return (dispatch) => dispatch({type: actionTypes.REGISTERING_CLEAR});
+}
+
 export default {
     markTaskDone: markTaskDone,
     getAllTasks: getAllTasks,
@@ -190,5 +209,7 @@ export default {
     addTask: addTask,
     toggleHideCompletedTasks: toggleHideCompletedTasks,
     loadPersistedToken: loadPersistedToken,
-    updateTask: updateTask
+    updateTask: updateTask,
+    performRegister: performRegister,
+    clearRegistering: clearRegistering
 };

@@ -40,7 +40,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logout: () => dispatch(tasks.performLogout())
+        logout: () => dispatch(tasks.performLogout()),
     };
 }
 
