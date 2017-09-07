@@ -50,6 +50,14 @@ export default (state = initialState, action) => {
                 }
             });
 
+        case actionTypes.LOGOUT_SUCCESS:
+            return Object.assign({}, state, {
+                session: {
+                    loggedIn: false,
+                    loginFailure: false
+                }
+            });
+
         case actionTypes.MARK_TASK_DONE_START:
             return state;
 

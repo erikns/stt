@@ -175,10 +175,17 @@ export const loadPersistedToken = (token) => {
     }
 }
 
+export const performLogout = () => {
+    return (dispatch) => {
+        dispatch({type: actionTypes.LOGOUT_SUCCESS});
+    }
+};
+
 export default {
     markTaskDone: markTaskDone,
     getAllTasks: getAllTasks,
     performLogin: performLogin,
+    performLogout: performLogout,
     deleteTask: deleteTask,
     addTask: addTask,
     toggleHideCompletedTasks: toggleHideCompletedTasks,

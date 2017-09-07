@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Home from './components/HomePage';
 import Login from './components/LoginPage';
 import Header from './components/Header';
+import tasks from './actions';
 import './App.css';
 
 class App extends Component {
@@ -38,4 +39,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+    return {
+        logout: () => dispatch(tasks.logout())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
