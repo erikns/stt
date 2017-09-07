@@ -4,6 +4,7 @@ const initialState = {
     tasks: [],
     tasksFailure: false,
     hideCompleted: false,
+    hiddenTasks: [],
     session: {
         loggedIn: false,
         token: null,
@@ -77,12 +78,25 @@ export default (state = initialState, action) => {
 
         case actionTypes.TOGGLE_HIDE_COMPLETED_TASKS:
             return Object.assign({}, state, {
-                hideCompleted: !state.hideCompleted
+                hideCompleted: !state.hideCompleted,
+                hiddenTasks: findTasksToHide(state.tasks, {unhide: state.hideCompleted})
             });
 
         default: return state;
     }
 };
+
+function findTasksToHide(tasks, args) {
+    const unhide = args.unhide || false;
+    let result = [];
+    if (unhide) { return []; }
+    tasks.forEach(task => {
+        if (task.done === true) {
+            result.push(task.id);
+        }
+    });
+    return result;
+}
 
 function updateObjectInArray(array, action) {
     return array.map( (item, index) => {
