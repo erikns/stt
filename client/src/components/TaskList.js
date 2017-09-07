@@ -157,9 +157,13 @@ class NewTaskLine extends Component {
     }
 }
 
+function shouldHide(hiddenIds, id) {
+    return hiddenIds.indexOf(id) >= 0;
+}
+
 const TaskList = (props) => {
     const taskItems = props.tasks.map((task) => {
-        if (props.hideCompleted && task.done) {
+        if (shouldHide(props.hiddenTasks, task.id)) {
             return (<div key={task.id} style={{display: 'none'}}/>);
         } else {
             return (

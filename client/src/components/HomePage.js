@@ -32,6 +32,7 @@ class Home extends Component {
             } else {
                 return (
                     <TaskList tasks={tasks}
+                        hiddenTasks={this.props.hiddenTasks}
                         markTaskDone={this.props.markTaskDone}
                         toggleHideCompletedTasks={this.props.toggleHideCompletedTasks}
                         hideCompleted={this.props.hideCompleted}
@@ -56,7 +57,8 @@ function mapStateToProps(state) {
     return {
         tasks: state.tasks,
         tasksFailure: state.tasksFailure,
-        hideCompleted: state.hideCompleted
+        hideCompleted: state.hideCompleted,
+        hiddenTasks: state.hiddenTasks
     };
 }
 
