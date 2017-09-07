@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Home from './components/HomePage';
@@ -13,15 +13,18 @@ class App extends Component {
       return (
           <div className="App">
               <Header logout={this.props.logout} session={this.props.session} />
-              <BrowserRouter>
-                <Route exact path='/' render={() => (
-                    this.props.session.loggedIn ? (
-                        <Home />
-                    ) : (
-                        <Login />
-                    )
-                )} />
-              </BrowserRouter>
+              <Router>
+                <div>
+                    <Route exact path='/' render={() => (
+                        this.props.session.loggedIn === true ? (
+                            <Home />
+                        ) : (
+                            <Redirect to="/login" />
+                        )
+                    )} />
+                    <Route exact path='/login' component={Login} />
+                </div>
+              </Router>
           </div>
       );
   }

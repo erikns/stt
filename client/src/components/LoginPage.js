@@ -37,6 +37,7 @@ class LoginPage extends Component {
 
     handleLoginClick(event) {
         this.props.onLoginClick(this.state.username, this.state.password);
+        this.props.history.push('/');
     }
 
     render() {
