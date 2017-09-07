@@ -124,7 +124,7 @@ class NewTaskLine extends Component {
     }
 
     handleKeyPress(event) {
-        if (event.charCode === 13) { // enter key pressed
+        if (event.charCode === 13 && this.state.editMode) { // enter key pressed
             this.handleSave();
         }
     }
