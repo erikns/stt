@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Icon from 'react-fa';
 
 const nonSelectableStyle = {
-   "-webkit-user-select": "none",
-   "-moz-user-select": "-moz-none",
-   "-khtml-user-select": "none"
+   "WebkitUserSelect": "none",
+   "MozUserSelect": "-moz-none",
+   "KhtmlUserSelect": "none"
 };
 const selectableStyle = {
-    "-webkit-user-select": "auto",
-    "-moz-user-select": "-moz-auto",
-    "-khtml-user-select": "auto"
+    "WebkitUserSelect": "auto",
+    "MozUserSelect": "-moz-auto",
+    "KhtmlUserSelect": "auto"
 };
 const inputStyle = {
     display: 'inline',
