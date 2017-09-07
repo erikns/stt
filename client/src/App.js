@@ -10,24 +10,18 @@ import './App.css';
 
 class App extends Component {
   render() {
-      const renderApp = () => {
-          if (this.props.session.loggedIn === true) {
-              return (
-                  <BrowserRouter>
-                      <Route exact path='/' component={Home} />
-                  </BrowserRouter>
-              );
-          } else {
-              return (
-                  <Login/>
-              );
-          }
-      };
-
       return (
           <div className="App">
               <Header logout={this.props.logout} session={this.props.session} />
-              {renderApp()}
+              <BrowserRouter>
+                <Route exact path='/' render={() => (
+                    this.props.session.loggedIn ? (
+                        <Home />
+                    ) : (
+                        <Login />
+                    )
+                )} />
+              </BrowserRouter>
           </div>
       );
   }
