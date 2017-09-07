@@ -8,7 +8,6 @@ const secret = 'secret'; // TODO: make configurable
 
 function extractToken(req) {
     var token = req.headers.authorization;
-    console.log('Provided token: ' + token);
     return token;
 }
 

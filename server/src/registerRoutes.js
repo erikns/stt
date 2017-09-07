@@ -29,11 +29,8 @@ function validateInput(user) {
 
 registerRouter.post('/', (req, res) => {
     const candidate_user = req.body;
-    console.log(candidate_user);
     const validation = validateInput(candidate_user);
-    console.log(validation);
     if (validation.valid === true) {
-        console.log('valid user');
         candidate_user.password = crypto.hashPassword(candidate_user.password);
         users.addUser(candidate_user)
             .then((created_user) => {
@@ -41,12 +38,15 @@ registerRouter.post('/', (req, res) => {
             })
             .catch((err) => {
                 if (err.error == 'USER_EXISTS') {
+                    console.log(err);
                     res.status(400).json({code: err.error, message: 'User already exists'});
                 } else {
+                    console.log(err);
                     res.status(500).json({code: err.error, message: 'Server error'});
                 }
             });
     } else {
+        console.log('Validation errors');
         res.status(400).json({error: 'Validation errors', details: validation.errors});
     }
 });

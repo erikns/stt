@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
     tasks.addTask(req.body).then((result) => {
         res.status(201).json(result);
     }).catch((err) => {
@@ -36,9 +35,7 @@ router.put('/:id', (req, res) => {
 
 router.patch('/:id', (req, res) => {
     const updated_task = req.body;
-    console.log(updated_task);
     tasks.getTask(Number(req.params.id)).then((task) => {
-        console.log(task);
         if (updated_task.name) { task.name = updated_task.name };
         if (updated_task.done === true) {
             task.done = true;
@@ -47,8 +44,6 @@ router.patch('/:id', (req, res) => {
         } else {
             task.done = false; // default to false
         }
-        console.log('Updated task');
-        console.log(task);
         tasks.updateTask(Number(req.params.id), task).then((result) => {
             res.status(200).json(result);
         }).catch((err) => {
