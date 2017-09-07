@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Home from './components/HomePage';
 import Login from './components/LoginPage';
+import Register from './components/RegisterPage';
 import Header from './components/Header';
 import tasks from './actions';
 import './App.css';
@@ -23,6 +24,7 @@ class App extends Component {
                         )
                     )} />
                     <Route exact path='/login' component={Login} />
+                    <Route exact path='/register' component={Register} />
                 </div>
               </Router>
           </div>

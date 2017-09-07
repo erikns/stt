@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { performLogin } from '../actions';
@@ -65,6 +66,8 @@ class LoginPage extends Component {
                         this.handleLoginClick();
                     }}/>
                 </form>
+                <p>If you do not have an account, you can <Link 
+                    to="/register">register</Link></p>
             </div>
         );
     }
