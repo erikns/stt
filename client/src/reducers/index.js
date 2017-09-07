@@ -51,6 +51,7 @@ export default (state = initialState, action) => {
             });
 
         case actionTypes.LOGOUT_SUCCESS:
+            sessionStorage.removeItem('tasksAppToken');
             return Object.assign({}, state, {
                 session: {
                     loggedIn: false,

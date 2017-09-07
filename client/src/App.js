@@ -26,7 +26,7 @@ class App extends Component {
 
       return (
           <div className="App">
-              <Header />
+              <Header logout={this.props.logout} session={this.props.session} />
               {renderApp()}
           </div>
       );
@@ -41,7 +41,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logout: () => dispatch(tasks.logout())
+        logout: () => dispatch(tasks.performLogout())
     };
 }
 
